@@ -1,6 +1,10 @@
 # my-vim-workspace
 Procedures to build my vim workspace
 
+## First Thing First
+ 
+Install `Vundle` from [here](https://github.com/VundleVim/Vundle.vim) which requires `git`. If you workspace (i.e. build machines) doesn't allow you to have a natural `git`, the simplest way is to create a VM and intall git and run `:PluginInstall` from there then `scp` the whole `.vim` repo to your workspace.
+
 ## Plugins in My Vim
 
 Most of plugins in my vimrc require nothing but a vim7.3+. Some of them needs additional supports. `Ultisnips` requires python2.7+. So I normally use alternative `vim-snipmate`. `YouCompleteMe` is an excellent autocomplete plugin for multi-language support, which requires some special libs/deps that would not be normally installed in your workspace (i.e. build machine).
@@ -48,7 +52,7 @@ Well done. A Vim7.3+ with Python2.7+ support is ready to use. Use `vim --version
  
 ### Build cmake From Source
 
-cmake is only required by `YouCompleteMe`. Official (help page)[https://cmake.org/install/]. Download link can find there.
+cmake is only required by `YouCompleteMe`. Official [help page](https://cmake.org/install/). Download link can find there.
 
 ```
 cd ~/workspace
@@ -61,7 +65,7 @@ make && make install
 
 ### Install `YouCompleteMe`
 
-The detail steps is under `YouCompleteMe` (github page)[https://github.com/Valloric/YouCompleteMe].
+The detail steps is under `YouCompleteMe` [github page](https://github.com/Valloric/YouCompleteMe).
 
 Basically the steps are:
 

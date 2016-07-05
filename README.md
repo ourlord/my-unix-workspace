@@ -75,3 +75,7 @@ cd ~/.vim/bundle/YouCompleteMe
 ```
 
 Seems the install scipt will download the correct clang so we shouldn't need to worry about that.
+
+Ok, here comes the fun part: the gcc on my workspace (i.e. build machine) is too old that ran into a compilation issue when run `./install.py` to install `YouCompleteMe`. And I have to compile gcc from source. I found a very [useful guide](http://stackoverflow.com/questions/9450394/how-to-install-gcc-piece-by-piece-with-gmp-mpfr-mpc-elf-without-shared-libra) could save thousands of time figuring out things by oneself. **Change the `wget` link from that page to use the other version of source package**
+
+Bang, here comes more fun: I have to compile glibc from source. Typically useing the same `./configure` flag. Source can be found [here](http://ftp.gnu.org/gnu/libc/).

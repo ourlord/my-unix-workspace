@@ -99,3 +99,10 @@ cd gcc-4.8.5
             --disable-multilib
 make && make install
 ```
+
+When run `./install.py --clang-completer', remember to set up the environment variables to allow `cmake` using the correct `gcc` by
+
+```
+export CC=$HOME/Applications/bin/gcc
+export CXX=$HOME/Applications/bin/g++
+```

@@ -48,7 +48,7 @@ make install
 
 Well done. A Vim7.3+ with Python2.7+ support is ready to use. Use `vim --version | tr '-' '\n' | grep python` to check if current vim is the correct one with python supports.
 
-(Here)[https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source] is a good reference for compiling Vim from source, from `YouCompleteMe` wiki.
+[Here](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source) is a good reference for compiling Vim from source, from `YouCompleteMe` wiki.
  
 ### Build cmake From Source
 

@@ -1,0 +1,41 @@
+[global_config]
+  focus = system
+  borderless = True
+  close_button_on_tab = False
+[keybindings]
+  next_tab = <Alt>Right
+  switch_to_tab_10 = <Alt>0
+  new_tab = <Alt>t
+  switch_to_tab_5 = <Alt>5
+  split_horiz = <Shift><Alt>d
+  go_prev = <Alt>bracketleft
+  prev_tab = <Alt>Left
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_4 = <Alt>4
+  close_term = <Alt>w
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_1 = <Alt>1
+  split_vert = <Alt>d
+  go_next = <Alt>bracketright
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    font = Consolas 11
+    scrollback_lines = 5000
+    use_system_font = False
+    cursor_color = "#ff7300"
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

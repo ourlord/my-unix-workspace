@@ -28,7 +28,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 " == snippets database
-Plugin 'honza/vim-snippets'
+Plugin 'ourlord/vim-snippets'
 " == bufexplorer ==
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'fholgado/minibufexpl.vim'

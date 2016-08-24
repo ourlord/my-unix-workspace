@@ -130,7 +130,7 @@ syntax on
 " Highlight current line
 set cursorline
 " Make tabs as wide as four spaces
-set tabstop=4
+set tabstop=8
 set smarttab
 set smartindent
 set expandtab

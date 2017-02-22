@@ -1,0 +1,33 @@
+[user]
+    #name = 
+	#email = 
+
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+
+[merge]
+#        tool = p4merge
+#        tool = meld
+        summary = true
+
+[diff]
+#        tool = p4merge
+#        tool = diff
+
+[merge "keepMine"]
+        name = always keep mine during merge
+        driver = keepMine.sh %O %A %B
+
+[core]
+    #excludesfile = /home/.../.gitignore_global

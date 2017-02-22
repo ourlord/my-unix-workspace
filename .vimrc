@@ -15,14 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " == plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-" == SirVer/ultisnips ==
-"Plugin 'SirVer/ultisnips'
-" Trigger configuration.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If want :UltiSnipsEdit to split window
-"let g:UltiSnipsEditSplit="vertical"
 " == snippets plugin not required python
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -31,13 +23,12 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'ourlord/vim-snippets'
 " == bufexplorer ==
 Plugin 'jlanzarotta/bufexplorer'
-"Plugin 'fholgado/minibufexpl.vim'
-Plugin 'vim-scripts/minibufexplorerpp'
-let g:miniBufExplMapCTabSwitchBufs=1
+Plugin 'fholgado/minibufexpl.vim'
+" nature mapping
 nmap <F6> :bp<CR>
 nmap <F7> :bn<CR>
 " == easygrep ==
-Plugin 'dkprice/vim-easygrep'
+"Plugin 'dkprice/vim-easygrep'
 " == rainbow parentheses ==
 Plugin 'oblitum/rainbow'
 let g:rainbow_active = 1
@@ -49,18 +40,8 @@ let g:rainbow_load_separately = [
     \ ]
 let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
-" == taglist ==
-Plugin 'vim-scripts/taglist.vim'
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
 " == AutoComplPop ==
 Plugin 'vim-scripts/AutoComplPop'
-" == winmanager ==
-Plugin 'vim-scripts/winmanager'
-let g:winManagerWindowLayout='FileExplorer|TagList'
-map <c-w><c-f> :FirstExplorerWindow<CR>
-map <c-w><c-b> :BottomExplorerWindow<CR>
-map <c-w><c-t> :WMToggle<CR>
 " == cpp-enhanced-highlight ==
 Plugin 'ourlord/vim-cpp-enhanced-highlight'
 let g:cpp_class_scope_highlight=1
@@ -74,6 +55,7 @@ Plugin 'vim-scripts/grep.vim'
 set grepprg=grep\ -nrI\ --exclude="*tags"\ --exclude="*.cscope"\ $*\ /dev/null
 nnoremap <silent> <F3> :Rgrep <CR>
 " == delimitMate ==
+" auto closing parameters quotes etc.
 Plugin 'Raimondi/delimitMate'
 let delimitMate_expand_cr = 1
 " == ctrlp.vim ==
@@ -82,7 +64,9 @@ Plugin 'kien/ctrlp.vim'
 " YANG language syntax in VIM
 Plugin 'ourlord/yang.vim'
 " == YouCompleteMe ==
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+"let g:ycm_auto_start_csharp_server = 0
+"let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -130,7 +114,7 @@ syntax on
 " Highlight current line
 set cursorline
 " Make tabs as wide as four spaces
-set tabstop=8
+set tabstop=4
 set smarttab
 set smartindent
 set expandtab

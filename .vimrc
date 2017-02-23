@@ -59,6 +59,7 @@ nnoremap <silent> <F3> :Rgrep <CR>
 Plugin 'Raimondi/delimitMate'
 let delimitMate_expand_cr = 1
 " == ctrlp.vim ==
+" Fuzzy search for filename, buffers etc..
 Plugin 'kien/ctrlp.vim'
 " == yang.vimrc ==
 " YANG language syntax in VIM

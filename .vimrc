@@ -44,8 +44,9 @@ let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 Plugin 'vim-scripts/AutoComplPop'
 " == cpp-enhanced-highlight ==
 Plugin 'ourlord/vim-cpp-enhanced-highlight'
-let g:cpp_class_scope_highlight=1
-let g:cpp_experimental_template_highlight=1     " highlighting of template functions(experimental)
+let g:cpp_class_scope_highlight=1           " highlight class scope
+let g:cpp_member_variable_highlight=1       " highlight member variables
+"let g:cpp_experimental_template_highlight=1 " highlighting of template functions(experimental)
 " == ctags.vim ==
 Plugin 'vim-scripts/ctags.vim'
 :set tags=./tags;/,tags;/home/

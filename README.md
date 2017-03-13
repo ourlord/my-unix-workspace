@@ -1,7 +1,7 @@
-# my-vim-workspace
-Procedures to build my vim workspace
+# my-unix-workspace
+Procedures to build my Unix workspace. Including my main editor vim with a python support. Also some files like my `.bashrc` my iTerm2 profile.
 
-## First Thing First
+## First Thing First - VIM
  
 Install `Vundle` from [here](https://github.com/VundleVim/Vundle.vim) which requires `git`. If you workspace (i.e. build machines) doesn't allow you to have a natural `git`, the simplest way is to create a VM and intall git and run `:PluginInstall` from there then `scp` the whole `.vim` repo to your workspace.
 
@@ -10,6 +10,18 @@ Install `Vundle` from [here](https://github.com/VundleVim/Vundle.vim) which requ
 Most of plugins in my vimrc require nothing but a vim7.3+. Some of them needs additional supports. `Ultisnips` requires python2.7+. So I normally use alternative `vim-snipmate`. `YouCompleteMe` is an excellent autocomplete plugin for multi-language support, which requires some special libs/deps that would not be normally installed in your workspace (i.e. build machine).
 
 Typically if `YouCompleteMe` is not included, a vim7.3+ is good enough to use all other feature in my vimrc. However here talks about how to build vim workspace with `YouCompleteMe` supports.
+
+I have a local clone of some plugin repo because I modified them. And I know two of them are still active for now. Just in case I grow old and starts to forget things. Here is the procedure to keep these local repo align with the upstream repo.
+
+```
+git clone <my plugin repo>
+git remote add upstream <original plugin repo>
+git pull upstream master
+<fix the merge - the fun part LOL>
+git commit -am <blablabla>
+git push origin
+```
+Open vim and do a `:PluginUpdate` to get the changes.
 
 ## Build Python2.7+ From Source
 
@@ -65,6 +77,7 @@ make && make install
 
 ### Install `YouCompleteMe`
 
+Well, I did not make this session works properly for now. So just for reference. No gurantee.
 The detail steps is under `YouCompleteMe` [github page](https://github.com/Valloric/YouCompleteMe).
 
 Basically the steps are:
@@ -108,4 +121,3 @@ export CC=$HOME/Applications/bin/gcc
 export CXX=$HOME/Applications/bin/g++
 ```
 
-So far so good.

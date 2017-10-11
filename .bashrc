@@ -2,6 +2,26 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+####################################################### HERE GOES MY PERSONAL CONFIG #########################################
+# Used for identify if in a screen session
+if [ ! "$STY" == "" ]; then
+    PS1="[$STY]$PS1"
+fi
+# Used for identify if in a pbuilder env
+if [ ! "$ANPBUILDER" == "" ]; then
+    PS1="[PBUILDER]$PS1"
+else
+    if [ `hostname` == "build02" ]; then
+        export TERM=screen-256color
+        # env for local apps if not in pbuilder
+        LINCOLNAPPDIR=$HOME/Applications
+        export PATH=$LINCOLNAPPDIR/python2.7/bin:$LINCOLNAPPDIR/vim7.4/bin:$LINCOLNAPPDIR/binutils/bin:$LINCOLNAPPDIR/scripts:$LINCOLNAPPDIR/cmatrix/bin:$LINCOLNAPPDIR/gcc-4.8.5/bin:$LINCOLNAPPDIR/cmake-3.6.0/bin:$LINCOLNAPPDIR/libevent/bin:$LINCOLNAPPDIR/ncurses/bin:$LINCOLNAPPDIR/tmux-2.2/bin:$LINCOLNAPPDIR/faup/bin:$LINCOLNAPPDIR/valgrind-3.12/bin:$LINCOLNAPPDIR/squid/bin:$LINCOLNAPPDIR/curl/bin:$LINCOLNAPPDIR/wget/bin:$LINCOLNAPPDIR/flex/bin:$LINCOLNAPPDIR/bison/bin:$LINCOLNAPPDIR/cscope/bin:$PATH
+        export LD_LIBRARY_PATH=$LINCOLNAPPDIR/python2.7/lib:$LINCOLNAPPDIR/libevent/lib:$LINCOLNAPPDIR/gmp/lib:$LINCOLNAPPDIR/mpfr/lib:$LINCOLNAPPDIR/mpc/lib:$LINCOLNAPPDIR/libelf/lib:$LINCOLNAPPDIR/gcc-4.8.5/lib64:$LINCOLNAPPDIR/libevent/lib:$LINCOLNAPPDIR/ncurses/lib:$LINCOLNAPPDIR/faup/lib:$LINCOLNAPPDIR/valgrind-3.12/lib/valgrind:$LINCOLNAPPDIR/squid/lib:$LINCOLNAPPDIR/readline/lib:$LINCOLNAPPDIR/flex/lib:$LINCOLNAPPDIR/bison/lib
+        export LD_RUN_PATH=$LINCOLNAPPDIR/python2.7/lib:$LINCOLNAPPDIR/gcc-4.8.5/lib64:$LINCOLNAPPDIR/faup/lib:$LINCOLNAPPDIR/valgrind-3.12/lib/valgrind:$LINCOLNAPPDIR/readline/lib
+    fi
+fi 
+####################################################### HERE ENDS MY PERSONAL CONFIG #########################################
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -113,19 +133,24 @@ if ! shopt -oq posix; then
   fi
 fi
 
-####################################################### HERE GOES MY PERSONAL CONFIG #########################################
-# Used for identify if in a screen session
-if [ ! "$STY" == "" ]; then
-    PS1="[$STY]$PS1"
-fi
-# Used for identify if in a pbuilder env
-if [ ! "$ANPBUILDER" == "" ]; then
-    PS1="[PBUILDER]$PS1"
-fi
 
 # Alias
+alias asb-gnu='/tools/bin/asb-gnu'
+alias asbb='asb-gnu compile-x86'
+alias asbbo='asb-gnu compile-x86 OPTIMIZED_BUILD=yes'
+alias asbi='asb-gnu install-x86'
+alias asbg='asb-gnu compile-gtests'
+alias asbc='asb-gnu clean'
+alias gows='cd /data/lincoln_xiong/'
 alias gitpatch='git diff --no-ext-diff --no-prefix'
 alias mtag='make_ctags.py'
+
+# env for pcrfsim
+export ACW_PAYMENTTYPE=PO
+export CPSROAMZONE=On-Net
+export CPSROAMZONEUPDATE=On-Net
+unset ACR_POLICY1
+#export ACW_POLICY1=NOABR
 
 # env for build machine
 export EDITOR=vi

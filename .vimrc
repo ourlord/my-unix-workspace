@@ -42,18 +42,23 @@ let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 " == AutoComplPop ==
 Plugin 'vim-scripts/AutoComplPop'
+" == OmniCppComplete ==
+Plugin 'vim-scripts/OmniCppComplete'
+" close preview window after completion
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " == cpp-enhanced-highlight ==
 Plugin 'ourlord/vim-cpp-enhanced-highlight'
 let g:cpp_class_scope_highlight=1           " highlight class scope
 let g:cpp_member_variable_highlight=1       " highlight member variables
-"let g:cpp_experimental_template_highlight=1 " highlighting of template functions(experimental)
+let g:cpp_experimental_template_highlight=0 " highlighting of template functions(experimental)
 " == ctags.vim ==
 Plugin 'vim-scripts/ctags.vim'
 :set tags=./tags;/,tags;/home/
 " == grep.vim ==
 Plugin 'vim-scripts/grep.vim'
 " set up a very useful shortcuts for Grep.Vim
-set grepprg=grep\ -nrI\ --exclude="*tags"\ --exclude="*.cscope"\ $*\ /dev/null
+set grepprg=grep\ -nrI\ --exclude="*tags"\ --exclude="*.cscope"\ --exclude=".*.swp"\ $*\ /dev/null
 nnoremap <silent> <F3> :Rgrep <CR>
 " == delimitMate ==
 " auto closing parameters quotes etc.
@@ -65,6 +70,8 @@ Plugin 'kien/ctrlp.vim'
 " == yang.vimrc ==
 " YANG language syntax in VIM
 Plugin 'ourlord/yang.vim'
+" == cscope.vim ==
+Plugin 'ourlord/vim-cscope'
 " == YouCompleteMe ==
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_auto_start_csharp_server = 0

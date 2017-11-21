@@ -72,6 +72,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'ourlord/yang.vim'
 " == cscope.vim ==
 Plugin 'ourlord/vim-cscope'
+" == git-gutter ==
+Plugin 'airblade/vim-gitgutter'
 " == YouCompleteMe ==
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_auto_start_csharp_server = 0

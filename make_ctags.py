@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Author: OurLord
+# Author: Lincoln X
 #
 # Used for creating ctags files for Affirmed build machine workspace
 #
 # Usage:
 #       ./make_ctags.py [workspace]
 #
-# The script would expect the workspace is distributed in the same level under WS_BASE_LOCATION
-#
-# My workspace architecture looks like this:
-# ~/workspace/ +- p1 +- wsroot +- projects +- sub1a
-#              |                           |- sub1b
-#              |
-#              +- p2 +- wsroot +- projects +- sub2a
-#                                          |- sub2b
+# The script would expect the workspace is distributed in the same level under /data/<user>/
+# 
+# Update (08/08/16):
+#   Handling JIRA workspace under /data/<user>/anxxxx. The workspace location in these types of folder is:
+#   /data/<user>/anxxx/workspace/anroot
 #
 
-
+import datetime
 import os
 import subprocess
 import sys
@@ -26,14 +23,27 @@ import sys
 
 # not recommend to use the env because the crontab might be triggered by a different user or group
 #CURUSER = os.environ['USER']
-CURUSER = 'ourlord'
-WS_BASE_LOCATION = '~/workspace'
-WS_ROOT_DIRNAME = 'wsroot'
+CURUSER = 'lincoln_xiong'
+WS_BASE_LOCATION = '/data/' + CURUSER
+WS_ROOT_DIRNAME = 'anroot'
 SUBMODULE_DIRNAME = 'projects'
 PROJECT_DIR = os.path.join(WS_ROOT_DIRNAME, SUBMODULE_DIRNAME)
 
-CTAGS_EXTRA_EXCLUDE = '--exclude=tools --exclude=*.js'
-CTAGS_CMD = 'ctags -R --fields=+l --exclude=.* ' + CTAGS_EXTRA_EXCLUDE
+# HERE GOES THE FILES NOT WANTED TO INCLUDED IN THE CSCOPE.FILES
+UNWANTED_FILES = [
+        '/linux-3.16.7-debian/',
+        '/linux-3.2.46-debian/',
+        '/stand_alone/',
+        'tos_fastpath/toolkit/',
+        ]
+
+CREATE_CSCOPE_FILES = "find ./ -name '*.[ch]' -o -name '*.[ch]pp' -o -name '*.cc' > ./cscope.files"
+
+#CTAGS_EXTRA_EXCLUDE = ' --exclude=tools --exclude=*.js --exclude=tools/stand_alone'
+#CTAGS_CMD = 'ctags --fields=+liaS --extra=+q --exclude=.* -L ./cscope.files' + CTAGS_EXTRA_EXCLUDE
+#CTAGS_CMD = 'ctags -R --fields=+liaS --extra=+q --exclude=.*' + CTAGS_EXTRA_EXCLUDE
+CTAGS_CMD = 'ctags --fields=+liaS --extra=+q -L cscope.files'
+CSCOPE_CMD = 'cscope -bqk'
 
 # Give some colorful output here
 # Useless if this is triggered by crontab LOL
@@ -58,8 +68,21 @@ def print_help():
 def main(workspace = ""):
     sub(workspace)
 
+def remove_not_wanted_source_files(cscope_filename = "./cscope.files"):
+    f = open(cscope_filename, 'r')
+    lines = f.readlines()
+    f.close()
+    f = open(cscope_filename, 'w')
+    for l in lines:
+        if any(e in l for e in UNWANTED_FILES):
+            pass
+        else:
+            f.write(l)
+    f.close()
+
 # Generate a global tags file under 'projects' directory
 def sub(workspace = ""):
+    start_dt = datetime.datetime.utcnow()
     # run this script without given a workspace name
     path = ''
     if workspace == "":
@@ -98,8 +121,16 @@ def sub(workspace = ""):
         bcolors.print_color('path [' + path + '] not found! Abort')
         return
     bcolors.print_color('generate ctags under :' + os.getcwd())
+    # run cscope
+    # create cscope.files first
+    subprocess.call(CREATE_CSCOPE_FILES, shell = True)
+    remove_not_wanted_source_files()
+    # run cscope
+    subprocess.call(CSCOPE_CMD, shell = True)
+    # run ctags
     subprocess.call(CTAGS_CMD, shell = True)
-    bcolors.print_color('tags file are generated')
+    delta = datetime.datetime.utcnow() - start_dt
+    bcolors.print_color('tags file are generated in ' + str(delta.seconds) + '.' + str(delta.microseconds / 1000) + ' sec')
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

@@ -58,7 +58,7 @@ Plugin 'vim-scripts/ctags.vim'
 " == grep.vim ==
 Plugin 'vim-scripts/grep.vim'
 " set up a very useful shortcuts for Grep.Vim
-set grepprg=grep\ -nrI\ --exclude="*tags"\ --exclude="*.cscope"\ --exclude=".*.swp"\ $*\ /dev/null
+set grepprg=grep\ -nrI\ --exclude="*tags"\ --exclude="*.cscope"\ --exclude=".*.swp"\ --exclude="\.*"\ $*\ /dev/null
 nnoremap <silent> <F3> :Rgrep <CR>
 " == delimitMate ==
 " auto closing parameters quotes etc.
@@ -72,18 +72,48 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'ourlord/yang.vim'
 " == cscope.vim ==
 Plugin 'ourlord/vim-cscope'
-" == git-gutter ==
-Plugin 'airblade/vim-gitgutter'
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  "if has('quickfix')
+  "  set cscopequickfix=s-,c-,d-,i-,t-,e-
+  "endif
+
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find f
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+
+endif
+" == vim-signify ==
+Plugin 'mhinz/vim-signify'
 " == YouCompleteMe ==
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_auto_start_csharp_server = 0
 "let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+" == vim-codefmt ==
+" Add maktaba and codefmt to the runtimepath
+" (The latter mustst be installed before it can be used.)
+"Plugin 'google/vim-maktaba'
+"Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage
+"Plugin 'google/vim-glaive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+
+" the galive#Install() should go after the "call vundle#end()"
+"call glaive#Install()
+" Optional: Enable codefmt's default mappings on the <Leader>= prefix.
+" Glaive codefmt plugin[mappings]
+" Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
+
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -150,7 +180,7 @@ set laststatus=2
 set modeline
 set modelines=4
 " Enable mouse in all modes
-set mouse=a
+"set mouse=a
 " Disable error bells
 set noerrorbells
 " Don’t reset cursor to start of line when moving around.

@@ -89,6 +89,8 @@ if has('cscope')
 endif
 " == vim-signify ==
 Plugin 'mhinz/vim-signify'
+" == vim-go ==
+Plugin 'fatih/vim-go'
 " == YouCompleteMe ==
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_auto_start_csharp_server = 0

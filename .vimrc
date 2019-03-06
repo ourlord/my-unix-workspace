@@ -27,8 +27,6 @@ Plugin 'fholgado/minibufexpl.vim'
 " nature mapping
 nmap <F6> :bp<CR>
 nmap <F7> :bn<CR>
-" == easygrep ==
-"Plugin 'dkprice/vim-easygrep'
 " == rainbow parentheses ==
 Plugin 'oblitum/rainbow'
 let g:rainbow_active = 1
@@ -73,24 +71,26 @@ Plugin 'ourlord/yang.vim'
 " == cscope.vim ==
 Plugin 'ourlord/vim-cscope'
 if has('cscope')
-  set cscopetag cscopeverbose
+""  set cscopetag cscopeverbose
 
+" disable these since conflict with g] (ctags)
   "if has('quickfix')
   "  set cscopequickfix=s-,c-,d-,i-,t-,e-
   "endif
 
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find f
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-
+  "cnoreabbrev csa cs add
+  cnoreabbrev csf cs find 
+  cnoreabbrev csff cs find f 
+  cnoreabbrev csfs cs find s 
+  cnoreabbrev csfc cs find c 
+  cnoreabbrev csfg cs find g 
+  "cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset 
+  cnoreabbrev css cs show 
+  cnoreabbrev csh cs help 
 endif
 " == vim-signify ==
 Plugin 'mhinz/vim-signify'
-" == vim-go ==
-Plugin 'fatih/vim-go'
 " == YouCompleteMe ==
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_auto_start_csharp_server = 0
@@ -154,15 +154,16 @@ set exrc
 set secure
 " Enable syntax highlighting
 syntax on
+set redrawtime=10000 " workaround for highlight breaks in 8.0
 " Highlight current line
 set cursorline
 " Make tabs as wide as four spaces
-set tabstop=4
-set smarttab
+"set tabstop=4 " The width of a hard tabstop measured in 'spaces'
+"set shiftwidth=4 " Size of indent. number of tabs times tabstop
+"set softtabstop=4 " non zero making spaces as tab
+"set expandtab " insert spaces instead of tab character
+set smarttab " depends on the near indentation to choose tab or space
 set smartindent
-set expandtab
-set softtabstop=4
-set shiftwidth=4
 set backspace=2
 set cindent
 " Enable line numbers
@@ -181,8 +182,6 @@ set laststatus=2
 " Respect modeline in files
 set modeline
 set modelines=4
-" Enable mouse in all modes
-"set mouse=a
 " Disable error bells
 set noerrorbells
 " Don’t reset cursor to start of line when moving around.

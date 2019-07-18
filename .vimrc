@@ -103,6 +103,15 @@ Plugin 'mhinz/vim-signify'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage
 "Plugin 'google/vim-glaive'
+" == vim-commentary ==
+" to auto comment a line of code or a block of code
+Plugin 'tpope/vim-commentary'
+" == vim-helm ==
+" syntax for helm templates (yaml + gotmpl + sprig + custom)
+Plugin 'towolf/vim-helm'
+" == vim-go ==
+" Golang support for vim
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

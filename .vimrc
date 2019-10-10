@@ -7,20 +7,37 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
+if has('nvim')
+  let g:python3_host_prog='/usr/bin/python3'
+endif
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" == plugin on GitHub repo
+" == plugin on GitHub repo ==
 Plugin 'tpope/vim-fugitive'
-" == snippets plugin not required python
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-" == snippets database
-Plugin 'ourlord/vim-snippets'
+" == New auto complete plugin from Shougo ==
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+else
+  "Plugin 'roxma/nvim-yarp'
+  "Plugin 'roxma/vim-hug-neovim-rpc'
+  Plugin 'Shougo/deoplete.nvim'
+endif
+" == New snippets plugin from Shougo ==
+if !has('nvim')
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
+" == AutoComplPop ==
+"Plugin 'vim-scripts/AutoComplPop'
+" == OmniCppComplete ==
+"Plugin 'vim-scripts/OmniCppComplete'
 " == bufexplorer ==
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'fholgado/minibufexpl.vim'
@@ -38,10 +55,6 @@ let g:rainbow_load_separately = [
     \ ]
 let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
-" == AutoComplPop ==
-Plugin 'vim-scripts/AutoComplPop'
-" == OmniCppComplete ==
-Plugin 'vim-scripts/OmniCppComplete'
 " close preview window after completion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -98,11 +111,11 @@ Plugin 'mhinz/vim-signify'
 " == vim-codefmt ==
 " Add maktaba and codefmt to the runtimepath
 " (The latter mustst be installed before it can be used.)
-"Plugin 'google/vim-maktaba'
-"Plugin 'google/vim-codefmt'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage
-"Plugin 'google/vim-glaive'
+Plugin 'google/vim-glaive'
 " == vim-commentary ==
 " to auto comment a line of code or a block of code
 Plugin 'tpope/vim-commentary'
@@ -112,6 +125,7 @@ Plugin 'towolf/vim-helm'
 " == vim-go ==
 " Golang support for vim
 Plugin 'fatih/vim-go'
+let g:go_def_mode='godef'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -144,7 +158,9 @@ colorscheme Tomorrow-Night
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
-set esckeys
+if !has('nvim')
+  set esckeys
+endif
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Optimize for fast terminal connections

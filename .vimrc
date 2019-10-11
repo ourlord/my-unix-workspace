@@ -23,9 +23,10 @@ if has('nvim')
   Plugin 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
 else
-  "Plugin 'roxma/nvim-yarp'
-  "Plugin 'roxma/vim-hug-neovim-rpc'
-  Plugin 'Shougo/deoplete.nvim'
+  " == AutoComplPop ==
+  Plugin 'vim-scripts/AutoComplPop'
+  " == OmniCppComplete ==
+  Plugin 'vim-scripts/OmniCppComplete'
 endif
 " == New snippets plugin from Shougo ==
 if !has('nvim')
@@ -34,10 +35,6 @@ if !has('nvim')
 endif
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
-" == AutoComplPop ==
-"Plugin 'vim-scripts/AutoComplPop'
-" == OmniCppComplete ==
-"Plugin 'vim-scripts/OmniCppComplete'
 " == bufexplorer ==
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'fholgado/minibufexpl.vim'
@@ -78,9 +75,6 @@ let delimitMate_expand_cr = 1
 " == ctrlp.vim ==
 " Fuzzy search for filename, buffers etc..
 Plugin 'kien/ctrlp.vim'
-" == yang.vimrc ==
-" YANG language syntax in VIM
-Plugin 'ourlord/yang.vim'
 " == cscope.vim ==
 Plugin 'ourlord/vim-cscope'
 if has('cscope')

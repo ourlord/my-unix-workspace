@@ -150,6 +150,7 @@ endif
 " == fancy status bar ==
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='fruit_punch'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

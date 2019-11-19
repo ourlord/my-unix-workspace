@@ -35,12 +35,37 @@ if !has('nvim')
 endif
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
+" Plugin key-mappings
+" Note: It must be "imap" and "smap". It uses <Plug> mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap". It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumbisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 " == bufexplorer ==
-Plugin 'jlanzarotta/bufexplorer'
 Plugin 'fholgado/minibufexpl.vim'
 " nature mapping
 nmap <F6> :bp<CR>
 nmap <F7> :bn<CR>
+" == Tree style file explorer ==
+Plugin 'scrooloose/nerdtree'
+" open NERDTree when vim start up empty
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabFree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
 " == rainbow parentheses ==
 Plugin 'oblitum/rainbow'
 let g:rainbow_active = 1
@@ -97,11 +122,8 @@ if has('cscope')
   cnoreabbrev csh cs help 
 endif
 " == vim-signify ==
+" Show diff for the file current editting
 Plugin 'mhinz/vim-signify'
-" == YouCompleteMe ==
-"Plugin 'Valloric/YouCompleteMe'
-"let g:ycm_auto_start_csharp_server = 0
-"let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 " == vim-codefmt ==
 " Add maktaba and codefmt to the runtimepath
 " (The latter mustst be installed before it can be used.)
@@ -120,6 +142,14 @@ Plugin 'towolf/vim-helm'
 " Golang support for vim
 Plugin 'fatih/vim-go'
 let g:go_def_mode='godef'
+if has('nvim')
+  Plugin 'stamblerre/gocode', {'rtp': 'nvim/'}
+else
+  Plugin 'stamblerre/gocode', {'rtp': 'vim/'}
+endif
+" == fancy status bar ==
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -208,7 +238,7 @@ set nostartofline
 " Show the cursor position
 set ruler
 " Don’t show the intro message when starting Vim
-set shortmess=atI
+"set shortmess=atI
 " Show the current mode
 set showmode
 " Show the filename in the window titlebar
@@ -238,4 +268,3 @@ let g:netrw_banner=0
 " change cursor shape between insert and normal mode in iTerm2.app
 let &t_SI="\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 let &t_EI="\<Esc>]50;CursorShape=0\x7" " Block in normal mode
-

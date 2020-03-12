@@ -28,32 +28,12 @@ else
   " == OmniCppComplete ==
   Plugin 'vim-scripts/OmniCppComplete'
 endif
-" == New snippets plugin from Shougo ==
-if !has('nvim')
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-" Plugin key-mappings
-" Note: It must be "imap" and "smap". It uses <Plug> mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap". It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumbisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+" == snippets plugin not required python
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+" == snippet database
+Plugin 'honza/vim-snippets'
 " == bufexplorer ==
 Plugin 'fholgado/minibufexpl.vim'
 " nature mapping
@@ -132,6 +112,19 @@ Plugin 'google/vim-codefmt'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage
 Plugin 'google/vim-glaive'
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
 " == vim-commentary ==
 " to auto comment a line of code or a block of code
 Plugin 'tpope/vim-commentary'
@@ -151,6 +144,7 @@ endif
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme='fruit_punch'
+let g:airline_extensions=['branch','ctrlp','fugitiveline']
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -159,10 +153,10 @@ filetype plugin indent on    " required
 "filetype plugin on
 
 " the galive#Install() should go after the "call vundle#end()"
-"call glaive#Install()
+call glaive#Install()
 " Optional: Enable codefmt's default mappings on the <Leader>= prefix.
-" Glaive codefmt plugin[mappings]
-" Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
+Glaive codefmt plugin[mappings]
+Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
 
 "
 " Brief help
@@ -211,7 +205,7 @@ set cursorline
 "set tabstop=4 " The width of a hard tabstop measured in 'spaces'
 "set shiftwidth=4 " Size of indent. number of tabs times tabstop
 "set softtabstop=4 " non zero making spaces as tab
-"set expandtab " insert spaces instead of tab character
+set expandtab " insert spaces instead of tab character
 set smarttab " depends on the near indentation to choose tab or space
 set smartindent
 set backspace=2

@@ -33,7 +33,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 " == snippet database
-Plugin 'honza/vim-snippets'
+Plugin 'ourlord/vim-snippets'
 " == bufexplorer ==
 Plugin 'fholgado/minibufexpl.vim'
 " nature mapping
